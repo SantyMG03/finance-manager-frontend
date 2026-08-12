@@ -1,11 +1,14 @@
 // src/pages/Login.jsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService';
 
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
+    const navigate = useNavigate();
 
     // Function executed when the buttom is clicked
     const handleSubmit = async (e) => {
@@ -18,7 +21,7 @@ export default function Login() {
             localStorage. setItem('token', data.token);
             alert('Login success!');
 
-            // TODO: Add here Dashboard redirect
+            navigate('/dashboard');
         } catch (err) {
             setError(err.message);
         }

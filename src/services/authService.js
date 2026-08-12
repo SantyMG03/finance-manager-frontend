@@ -25,7 +25,8 @@ export const loginUser = async (username, password) => {
     try {
       const errorBody = await response.json();
       message = errorBody.message || errorBody.error || errorBody.detail || message;
-    } catch (e) {
+    } catch {
+      // Fallback to `message` if JSON response is not valid
     }
     throw new Error(message + 'Error procesing the error response from the server.');
   }

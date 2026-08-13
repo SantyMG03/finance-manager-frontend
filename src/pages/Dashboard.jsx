@@ -45,9 +45,16 @@ export default function Dashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2>Resumen de tu Portafolio</h2>
             <div>
+                {/* Goes to Transaction History */}
+                <button onClick={() => navigate('/history')} style={{ padding: '8px 12px', backgroundColor: '#17a2b8', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight: '10px' }}>
+                    Ver Historial
+                </button>
+
+                {/* Goes to Add Transaction */}
                 <button onClick={() => navigate('/add-transaction')} style={{ padding: '8px 12px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight: '10px' }}>
                     + Añadir Transacción
                 </button>
+
                 <button onClick={handleLogout} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
                     Cerrar Sesión
                 </button>

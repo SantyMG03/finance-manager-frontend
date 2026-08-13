@@ -1,6 +1,6 @@
 # Personal Finance & Portfolio Frontend
 
-Web frontend for personal finance and investment portfolio tracking. React SPA that consumes the [Personal Finance & Portfolio API](https://github.com/santy/finance-manager-backend): log in, view your portfolio analysis, add and delete stock/ETF transactions, and browse your transaction history.
+Web frontend for personal finance and investment portfolio tracking. React SPA that consumes the [Personal Finance & Portfolio API]([https://github.com/santy/finance-manager-backend](https://github.com/SantyMG03/finance-manager-backend)): log in, view your portfolio analysis, add and delete stock/ETF transactions, and browse your transaction history.
 
 ## 🛠️ Technologies
 

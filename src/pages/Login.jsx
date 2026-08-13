@@ -1,6 +1,6 @@
 // src/pages/Login.jsx
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { loginUser } from '../services/authService';
 
 export default function Login() {
@@ -56,6 +56,9 @@ export default function Login() {
           Entrar
         </button>
       </form>
+      <p style={{ marginTop: '20px' }}>
+        ¿No tienes cuenta? <Link to="/register" style={{ color: '#007bff' }}>Regístrate aquí</Link>
+      </p>
     </div>
   );
 }

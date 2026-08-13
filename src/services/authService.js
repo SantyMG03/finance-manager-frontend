@@ -34,3 +34,17 @@ export const loginUser = async (username, password) => {
   const data = await response.json();
   return data; // Returns the token
 };
+
+export const registerUser = async (username, email, password) => {
+  const response = await fetch(`${API_URL}/register`, {
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, email, password }),
+  });
+
+  if (!response.ok) throw new Error('Error registering. Maybe the username or email is already taken.');
+
+  return response.json();
+};

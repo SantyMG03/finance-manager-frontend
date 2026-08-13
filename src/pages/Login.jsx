@@ -3,31 +3,33 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginUser } from '../services/authService';
 
+import toast from 'react-hot-toast';
+
 export default function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    // Function executed when the buttom is clicked
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent the page from reloading
-        setError(''); // Removes previous error
+  // Function executed when the buttom is clicked
+  const handleSubmit = async (e) => {
+      e.preventDefault(); // Prevent the page from reloading
+      setError(''); // Removes previous error
 
-        try {
-            const data = await loginUser(username, password);
+      try {
+          const data = await loginUser(username, password);
 
-            localStorage. setItem('token', data.token);
-            alert('Login success!');
+          localStorage. setItem('token', data.token);
+          toast.success('Login success!');
 
-            navigate('/dashboard');
-        } catch (err) {
-            setError(err.message);
-        }
-    };
+          navigate('/dashboard');
+      } catch (err) {
+          toast.error(err.message);
+      }
+  };
 
-    return (
+  return (
     <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', textAlign: 'center' }}>
       <h2>Iniciar Sesión en Finances</h2>
       

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addTransaction } from '../services/transactionService';
 
+import toast from 'react-hot-toast';
+
 export default function AddTransaction() {
     const navigate = useNavigate();
     const [error, setError] = useState('');
@@ -37,11 +39,11 @@ export default function AddTransaction() {
             };
             
             await addTransaction(transactionPayload);
-            alert('Transaction added successfully!');
+            toast.success('Transaction added successfully!');
 
             navigate('/dashboard'); 
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message);
         }
     }
 

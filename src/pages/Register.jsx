@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { registerUser } from '../services/authService';
 
+import toast from 'react-hot-toast';
+
 export default function Register() {
     const navigate = useNavigate();
     const [error, setError] = useState('');
@@ -28,10 +30,10 @@ export default function Register() {
 
         try {
             await registerUser(formData.username, formData.email, formData.password);
-            alert('User registered successfully. Now you can log in.');
+            toast.success('User registered successfully. Now you can log in.');
             navigate('/login');
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message);
         }
     };
 

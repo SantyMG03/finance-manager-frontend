@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUserTransactions, deleteTransaction } from '../services/transactionService';
 
+import toast from 'react-hot-toast';
+
 export default function TransactionHistory() {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -16,23 +18,52 @@ export default function TransactionHistory() {
             const data = await getUserTransactions();
             setTransactions(data);
         } catch (err) {
-            alert('Error fetching transactions: ' + err.message);
+            toast.error('Error fetching transactions: ' + err.message);
         } finally {
             setLoading(false);
         }
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this transaction?')) {
-            try{
-                await deleteTransaction(id);
-                // Filter the deleted transaction from the view without reloading the page               
-                setTransactions(transactions.filter(t => t.id !== id));
-            } catch (err) {
-                alert('Error deleting transaction: ' + err.message);
-            }
-        }
-    };
+    const handleDelete = (id) => {
+    // Usamos toast() pasándole un componente visual (t representa este toast específico)
+    toast((t) => (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', textAlign: 'center' }}>
+            <span style={{ fontWeight: 'bold' }}>¿Seguro que quieres eliminarla?</span>
+            <span style={{ fontSize: '14px', color: '#666' }}>Esta acción no se puede deshacer.</span>
+            
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '5px' }}>
+            <button 
+                onClick={async () => {
+                toast.dismiss(t.id); // Hide the toast immediately
+                
+                try {
+                    // Actually delete the transaction
+                    await deleteTransaction(id);
+                    setTransactions(transactions.filter(transaction => transaction.id !== id));
+                    toast.success('Transacción eliminada con éxito');
+                } catch (error) {
+                    toast.error('Error al borrar: ' + error.message);
+                }
+                }} 
+                style={{ padding: '6px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+                Sí, borrar
+            </button>
+            
+            <button 
+                onClick={() => toast.dismiss(t.id)} // Simply dismiss the toast without doing anything
+                style={{ padding: '6px 12px', backgroundColor: '#e2e8f0', color: '#333', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+                Cancelar
+            </button>
+            
+            </div>
+        </div>
+    ), {
+      duration: 6000, // Extra time to decide
+      icon: '⚠️',
+    });
+  };
 
     if (loading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>Cargando historial...</div>;
 

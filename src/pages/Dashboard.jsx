@@ -70,6 +70,12 @@ export default function Dashboard() {
                     + Añadir Transacción
                 </button>
 
+                {/* Goes to Diary */}
+                <button onClick={() => navigate('/diary')} style={{ padding: '8px 12px', backgroundColor: '#6f42c1', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight: '10px' }}>
+                    Ir al Diario
+                </button>
+
+                {/* Logout */}
                 <button onClick={handleLogout} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
                     Cerrar Sesión
                 </button>

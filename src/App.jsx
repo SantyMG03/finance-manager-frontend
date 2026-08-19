@@ -7,6 +7,8 @@ import AddTransaction from './pages/AddTransaction';
 import TransactionHistory from './pages/TransactionHistory';
 import Register from './pages/Register';
 import Diary from './pages/Diary';
+import Categories from './pages/Categories';
+import BankAccounts from './pages/BankAccounts';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/diary" element={<Diary />} />
+        <Route path="/accounts" element={<BankAccounts />} />
+        <Route path="/categories" element={<Categories />} />
         <Route path="/add-transaction" element={<AddTransaction />} /> 
         <Route path="/history" element={<TransactionHistory />} />
         <Route path="*" element={<Navigate to="/" />} />

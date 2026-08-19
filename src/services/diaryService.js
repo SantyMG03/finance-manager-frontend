@@ -18,7 +18,7 @@ export const addDiaryEntry = async (entry) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Bearer': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(entry),
     });
